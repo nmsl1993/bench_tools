@@ -86,13 +86,12 @@ class pps(object):
 
             command += '%04i'%value
 
-        data = self.send_command(command)
+            data = self.send_command(command)
 
-        if value is not None:
             if not self.check_ok(data):
                 raise ValueError('Communication fail')
-
         else:
+            data = self.send_command(command, bytes_to_read=6)
             output = float(data.strip())/100.
             return output
 
@@ -130,13 +129,13 @@ class pps(object):
 
             command += '%04i'%value
 
-        data = self.send_command(command)
+            data = self.send_command(command)
 
-        if value is not None:
             if not self.check_ok(data):
                 raise ValueError('Communication fail')
 
         else:
+            data = self.send_command(command, bytes_to_read=6)
             output = float(data.strip())/1000.
             return output
 
